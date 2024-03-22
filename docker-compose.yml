@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  ui:
+    image: reviews-analysis-ui
+    container_name: reviews-analysis-ui
+    command:
+      ["streamlit", "run", "UI.py", "--server.port", "8000"]
+    volumes:
+      - ./UI.py:/app/UI.py
+    ports:
+      - "8000:8000"
+    networks:
+      - reviews-analysis-net
+
+  endpoints:
+    image: reviews-analysis-endpoint
+    container_name: reviews-analysis-endpoint
+    command:
+      ["uvicorn", "endpoints:app", "--host", "0.0.0.0", "--port", "8118"]
+    volumes:
+      - .:/app
+    ports:
+      - "8118:8118"
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    networks:
+      - reviews-analysis-net
+
+
+networks:
+  reviews-analysis-net:
+    name: reviews-analysis-net
+    driver: bridge

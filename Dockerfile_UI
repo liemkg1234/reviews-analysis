@@ -1,0 +1,9 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY ./UI.py .
+
+RUN pip install --no-cache-dir streamlit requests
+
+CMD ["streamlit", "run", "UI.py", "--server.port", "8000"]
