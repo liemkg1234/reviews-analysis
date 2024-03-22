@@ -24,6 +24,8 @@ make start
 ## Demo
 ![Demo](/reports/demo.png "Demo")
 
+- Report at: ```/reports/report.pdf```
+
 ## Contact
 ```
 liemkg1234@gmail.com
