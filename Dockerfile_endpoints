@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY ./endpoints.py .
 
-RUN pip install --no-cache-dir fastapi==0.68.0 uvicorn[standard]==0.15.0 transformers datasets evaluate accelerate optimum[exporters,onnxruntime]
+RUN pip install --no-cache-dir fastapi==0.68.0 uvicorn[standard]==0.15.0 transformers datasets evaluate accelerate optimum[exporters,onnxruntime-gpu]
 
 CMD ["uvicorn", "endpoints:app", "--host", "0.0.0.0", "--port", "8118"]

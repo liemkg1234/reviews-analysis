@@ -8,17 +8,27 @@
 ```# command
 git clone https://github.com/liemkg1234/reviews-analysis
 cd reviews-analysis
-make build-cpu # or 'build-gpu' if you want
+make build
 ```
 
 - Step 2: Download Model
-```
-make download_model
-```
+  - Go [here](https://www.kaggle.com/datasets/liemkg1234/distilbert-imdb-finetuned)
+  - Download & unzip with folder name is ```distilbert_imdb```
+  - Copy ```distilbert_imdb``` into ```/models```
+
 
 - Step 3: Start Server
 ```
 make start
+```
+
+## Test Results
+- Result at: ```/eval/eval_distilbert_imdb.csv```
+```
+- Accuracy: 0.92656
+- Precision: 0.9265
+- Recall: 0.9265
+- F1: 0.926
 ```
 
 ## Demo

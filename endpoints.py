@@ -7,7 +7,8 @@ app = FastAPI()
 
 # Schema
 class ReviewRequest(BaseModel):
-    text: str = Field(..., example="It actually pains me to say it, but this movie was horrible on every level. The blame does not lie entirely with Van Damme as you can see he tried his best, but let's face it, he's almost fifty, how much more can you ask of him? I find it so hard to believe that the same people who put together Undisputed 2; arguably the best (western) martial arts movie in years, created this. Everything from the plot, to the dialog, to the editing, to the overall acting was just horribly put together and in many cases outright boring and nonsensical. Scott Adkins who's fight scenes seemed more like a demo reel, was also terribly underused and not even the main villain which is such a shame because 1) He is more than capable of playing that role and 2) The actual main villain was not only not intimidating at all but also quite annoying. Again, not blaming Van Damme. I will always be a fan, but avoid this one.")
+    text: str = Field(...,
+                      example="It actually pains me to say it, but this movie was horrible on every level. The blame does not lie entirely with Van Damme as you can see he tried his best, but let's face it, he's almost fifty, how much more can you ask of him? I find it so hard to believe that the same people who put together Undisputed 2; arguably the best (western) martial arts movie in years, created this. Everything from the plot, to the dialog, to the editing, to the overall acting was just horribly put together and in many cases outright boring and nonsensical. Scott Adkins who's fight scenes seemed more like a demo reel, was also terribly underused and not even the main villain which is such a shame because 1) He is more than capable of playing that role and 2) The actual main villain was not only not intimidating at all but also quite annoying. Again, not blaming Van Damme. I will always be a fan, but avoid this one.")
 
     @validator('text')
     def validate_text(cls, v):
@@ -40,9 +41,16 @@ import torch
 from optimum.onnxruntime import ORTModelForSequenceClassification
 from transformers import AutoTokenizer
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+provider = "CUDAExecutionProvider" if device == 'cuda' else "CPUExecutionProvider"
+print("Device:", device)
 model_interface = "models/distilbert_imdb/distilbert_imdb_onnx_quantized"
 tokenizer = AutoTokenizer.from_pretrained(model_interface)
-model = ORTModelForSequenceClassification.from_pretrained(model_interface, use_cache=False)
+model = ORTModelForSequenceClassification.from_pretrained(
+    model_interface,
+    use_cache=False,
+    provider=provider,
+)
 
 
 def predict_analysis_review(text: str) -> dict:
