@@ -8,7 +8,7 @@
 ```# command
 git clone https://github.com/liemkg1234/reviews-analysis
 cd reviews-analysis
-make build
+make build-cpu # or 'build-gpu' if you want
 ```
 
 - Step 2: Download Model
