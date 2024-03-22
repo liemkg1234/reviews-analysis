@@ -23,7 +23,8 @@ make start
 
 ## Demo
 ![Demo](/reports/demo.png "Demo")
-
+## APIs
+![APIs](/reports/APIs.png "APIs")
 - Report at: ```/reports/report.pdf```
 
 ## Contact
