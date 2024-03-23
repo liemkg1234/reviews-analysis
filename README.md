@@ -1,4 +1,4 @@
-# Reviews Classification Using DistilBERT
+# Reviews Analysis Using DistilBERT
 - [Endpoints](http://localhost:8118/docs) (FastAPI, Transformer)
 - [UI](http://localhost:8000) (Streamlit)
 
